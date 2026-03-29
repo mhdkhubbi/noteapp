@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun SettingsScreen(modifier: Modifier = Modifier) {
 
-    Column(Modifier.fillMaxSize()) {
+    Column(modifier.fillMaxSize()) {
         Text("Settings", fontSize = 24.sp)
         ElevatedCard(
             elevation = CardDefaults.cardElevation(

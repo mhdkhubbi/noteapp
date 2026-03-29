@@ -8,7 +8,7 @@ import io.mhdkhubbi.noteapp.ui.screens.components.SearchBar
 
 @Composable
 fun SearchScreen(modifier: Modifier = Modifier) {
-    Column(Modifier.fillMaxSize()) {
+    Column(modifier.fillMaxSize()) {
         SearchBar()
     }
 
