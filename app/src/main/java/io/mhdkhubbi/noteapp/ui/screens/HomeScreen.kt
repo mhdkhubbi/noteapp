@@ -22,7 +22,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 //        horizontalAlignment = Alignment.CenterHorizontally,
 //        verticalArrangement = Arrangement.Center
     ) {
-        Text("My Garden of Thoughts", fontSize = 34.sp, fontWeight = FontWeight.SemiBold)
+        Text("My Garden of Thoughts", fontSize = 34.sp,lineHeight = 48.sp, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.height(10.dp))
         Text("A curated collection of research, notes, and botanical observations",fontSize = 16.sp)
         SearchBar()
