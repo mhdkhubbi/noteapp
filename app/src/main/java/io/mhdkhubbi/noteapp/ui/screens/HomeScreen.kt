@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,14 +19,14 @@ import io.mhdkhubbi.noteapp.ui.screens.components.SearchBar
 fun HomeScreen(modifier: Modifier = Modifier) {
 
     Column(
-        modifier.fillMaxSize(),
+        modifier.fillMaxSize().padding(start = 20.dp, end = 20.dp),
 //        horizontalAlignment = Alignment.CenterHorizontally,
 //        verticalArrangement = Arrangement.Center
     ) {
-        Text("My Garden of Thoughts", fontSize = 34.sp,lineHeight = 48.sp, fontWeight = FontWeight.SemiBold)
+        Text("My Garden of Thoughts", fontSize = 34.sp,lineHeight = 40.sp, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.height(10.dp))
-        Text("A curated collection of research, notes, and botanical observations",fontSize = 16.sp)
         SearchBar()
+        Spacer(Modifier.height(10.dp))
         NoteItem()
     }
 

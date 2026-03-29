@@ -25,45 +25,48 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier, values: String="",
     onValueChange: (String) -> Unit={}
 ) {
     var text by remember { mutableStateOf("") }
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 15.dp, end = 15.dp)
-            .height(40.dp)
-            .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp)),
-        contentAlignment = Alignment.Center
-    ) {
-        Row( modifier = Modifier.padding(2.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Icon(
-                Icons.Default.Search,
-                contentDescription = "Search", tint = MaterialTheme.colorScheme.onSurfaceVariant
 
-            )
-            Spacer(Modifier.width(8.dp))
-            BasicTextField(
-                value = text,
-                onValueChange = {text=it},
-                singleLine = true,
-                // textStyle = LocalTextStyle.current.copy(color = Gray500),
-                decorationBox = { innerTextField ->
-                    if (text.isEmpty()) {
-                        Text(
-                            "Search through your notes",color=MaterialTheme.colorScheme.onSurfaceVariant
-                        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 5.dp)
+                .height(50.dp)
+                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(25.dp)),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Row(
+                modifier = Modifier.padding(start=15.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    Icons.Default.Search,
+                    contentDescription = "Search", tint = MaterialTheme.colorScheme.onSurfaceVariant
+
+                )
+                Spacer(Modifier.width(8.dp))
+                BasicTextField(
+                    value = text,
+                    onValueChange = { text = it },
+                    singleLine = true,
+                    // textStyle = LocalTextStyle.current.copy(color = Gray500),
+                    decorationBox = { innerTextField ->
+                        if (text.isEmpty()) {
+                            Text(
+                                "Search through your notes",
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        innerTextField()
                     }
-                    innerTextField()
-                }
-            )
+                )
+            }
         }
-    }
+
 }
