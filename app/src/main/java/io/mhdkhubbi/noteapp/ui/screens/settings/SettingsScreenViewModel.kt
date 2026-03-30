@@ -19,7 +19,8 @@ class SettingsScreenViewModel(
     private val _isSwitchOn = MutableStateFlow(false)
     val isSwitchOn: StateFlow<Boolean> = _isSwitchOn.asStateFlow()
 
-
+      private val _isLoading = MutableStateFlow(true)
+      val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     init {
         loadPreferences()
@@ -31,6 +32,7 @@ class SettingsScreenViewModel(
                 _firstName.value = preferences.firstName
                 _lastName.value = preferences.lastName
                 _isSwitchOn.value = preferences.isSwitchOn
+                _isLoading.value=false
             }
         }
     }
@@ -51,6 +53,7 @@ class SettingsScreenViewModel(
 
     fun updateThemeModePreference(isEnabled: Boolean) {
         _isSwitchOn.value = isEnabled
+        _isLoading.value=false
         viewModelScope.launch {
             userPreferencesManager.saveThemeModePreference(isEnabled)
         }

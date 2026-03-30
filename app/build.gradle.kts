@@ -76,13 +76,14 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation(libs.androidx.ui.text.google.fonts)
     implementation("androidx.datastore:datastore-preferences:1.2.1")
-    // 3. Core Libraries
+    
+    // Koin
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
     implementation(libs.koin.android)
-
-    // 4. Compose Support
     implementation(libs.koin.compose)
     implementation(libs.koin.compose.viewmodel)
+    
     implementation("io.insert-koin:koin-androidx-compose-navigation:4.0.0")
     implementation(libs.kotlinx.serialization.json)
 

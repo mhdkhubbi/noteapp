@@ -5,6 +5,7 @@
     <application
         android:name="io.mhdkhubbi.compose.MainApplication"
         android:allowBackup="true"
+        android:configChanges="layoutDirection|locale|uiMode"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"

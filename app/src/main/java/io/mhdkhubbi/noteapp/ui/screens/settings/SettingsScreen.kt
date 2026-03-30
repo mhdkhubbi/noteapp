@@ -96,7 +96,7 @@ fun SettingsScreen(
                             .size(70.dp, 70.dp)
                     )
                     Spacer(Modifier.width(15.dp))
-                    Text("Muhammad joe", fontSize = 20.sp, fontWeight = FontWeight.Medium)
+                    Text("$firstName $lastName", fontSize = 20.sp, fontWeight = FontWeight.Medium)
                 }
                 Spacer(Modifier.height(20.dp))
                 Row(Modifier.padding(start = 10.dp)) {
