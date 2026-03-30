@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.devtoolsKsp)
     alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.koin.compiler)
 }
 
 android {
@@ -40,6 +41,14 @@ android {
         compose = true
     }
 }
+tasks.register("cleanKsp") {
+    delete("build/generated/ksp")
+}
+
+tasks.named("preBuild") {
+    dependsOn("cleanKsp")
+}
+
 
 dependencies {
     implementation(libs.androidx.core.ktx)

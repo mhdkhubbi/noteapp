@@ -41,8 +41,10 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(modifier: Modifier = Modifier,
-               viewModel: SettingsScreenViewModel = koinViewModel()) {
+fun MainScreen(
+    modifier: Modifier = Modifier,
+    viewModel: SettingsScreenViewModel = koinViewModel()
+) {
     var destination by rememberSaveable {
         mutableStateOf(Destinations.HOME)
     }
@@ -55,14 +57,14 @@ fun MainScreen(modifier: Modifier = Modifier,
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface,
-//                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
+
+                    ),
                 title = {
                     Row(
                         Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
 
-                    ) {
+                        ) {
                         Icon(
                             painter = painterResource(R.drawable.profile),
                             contentDescription = "Profile",
@@ -77,7 +79,11 @@ fun MainScreen(modifier: Modifier = Modifier,
                                 .size(40.dp, 40.dp)
                         )
                         Spacer(Modifier.width(20.dp))
-                        Text("Hi $firstName $lastName!", fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
+                        Text(
+                            "Hi $firstName $lastName!",
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.SemiBold
+                        )
                     }
 
                 }
@@ -101,25 +107,19 @@ fun MainScreen(modifier: Modifier = Modifier,
                             icon = {
                                 Icon(
                                     dest.icon,
-                                    contentDescription = dest.contentDescription
-                                    , modifier = Modifier.size(30.dp)
+                                    contentDescription = dest.contentDescription,
+                                    modifier = Modifier.size(30.dp)
                                 )
                             },
                             label = { Text(dest.label) },
                             selected = dest == destination,
                             onClick = { destination = dest },
-//                            colors = NavigationBarItemDefaults.colors(
-//                                selectedIconColor = MaterialTheme.colorScheme.primary,
-//                                selectedTextColor = MaterialTheme.colorScheme.primary,
-//                                unselectedIconColor = Color.DarkGray,
-//                                unselectedTextColor = Color.DarkGray,
-//                                indicatorColor = Color.Magenta
-//                            )
                         )
                     }
                 }
             }
-        }
+        },
+
     ) { paddingValues ->
 
         Box(
@@ -127,10 +127,7 @@ fun MainScreen(modifier: Modifier = Modifier,
                 .fillMaxSize()
                 .padding(paddingValues)
 
-//                .background(
-//                    MaterialTheme.colorScheme.surfaceContainer)
-
-                ) {
+        ) {
             when (destination) {
                 Destinations.HOME -> HomeScreen(Modifier.fillMaxSize())
                 Destinations.SEARCH -> SearchScreen(Modifier.fillMaxSize())
