@@ -1,7 +1,7 @@
 # Noteapp
 This project explains the following:
-1.how to use datastore to store preferences 
-2.how to use room database library to save info 
+1.how to use datastore to store preferences
+2.how to use room database library to save info
 3.how to use Koin DI
 # tech-stack
 1.room database libray
