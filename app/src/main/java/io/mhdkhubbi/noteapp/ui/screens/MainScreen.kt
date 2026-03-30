@@ -18,6 +18,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,10 +46,10 @@ fun MainScreen() {
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-//                colors = TopAppBarDefaults.topAppBarColors(
-//                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.surface,
 //                    titleContentColor = MaterialTheme.colorScheme.primary,
-//                ),
+                ),
                 title = {
                     Row(
                         Modifier.fillMaxWidth(),
@@ -69,7 +70,7 @@ fun MainScreen() {
                                 .size(40.dp, 40.dp)
                         )
                         Spacer(Modifier.width(20.dp))
-                        Text("Hi User!", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+                        Text("Hi User!", fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
                     }
 
                 }
@@ -94,6 +95,7 @@ fun MainScreen() {
                                 Icon(
                                     dest.icon,
                                     contentDescription = dest.contentDescription
+                                    , modifier = Modifier.size(30.dp)
                                 )
                             },
                             label = { Text(dest.label) },
@@ -117,7 +119,11 @@ fun MainScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-        ) {
+
+//                .background(
+//                    MaterialTheme.colorScheme.surfaceContainer)
+
+                ) {
             when (destination) {
                 Destinations.HOME -> HomeScreen(Modifier.fillMaxSize())
                 Destinations.SEARCH -> SearchScreen(Modifier.fillMaxSize())

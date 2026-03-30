@@ -19,9 +19,7 @@ import io.mhdkhubbi.noteapp.ui.screens.components.SearchBar
 fun HomeScreen(modifier: Modifier = Modifier) {
 
     Column(
-        modifier.fillMaxSize().padding(start = 20.dp, end = 20.dp),
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//        verticalArrangement = Arrangement.Center
+        modifier.fillMaxSize().padding(start = 20.dp, end = 20.dp, top = 5.dp),
     ) {
         Text("My Garden of Thoughts", fontSize = 34.sp,lineHeight = 40.sp, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.height(10.dp))

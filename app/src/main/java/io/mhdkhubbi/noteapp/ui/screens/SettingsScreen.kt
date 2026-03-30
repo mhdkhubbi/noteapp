@@ -14,9 +14,15 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,13 +36,16 @@ import io.mhdkhubbi.noteapp.R
 
 @Composable
 fun SettingsScreen(modifier: Modifier = Modifier) {
-
+    var text by remember { mutableStateOf("") }
     Column(modifier.fillMaxSize().padding(start = 20.dp, end = 20.dp, top = 20.dp)) {
         Text("Settings", fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.height(20.dp))
         ElevatedCard(
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 6.dp
+            ),
+            colors = CardDefaults.elevatedCardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceContainerLowest
             ),
             modifier = Modifier
                 .fillMaxWidth()
@@ -64,18 +73,32 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                             .size(70.dp, 70.dp)
                     )
                     Spacer(Modifier.width(15.dp))
-                    Text("Muhammad Alkhubbi", fontSize = 20.sp, fontWeight = FontWeight.Medium)
+                    Text("Muhammad joe", fontSize = 20.sp, fontWeight = FontWeight.Medium)
+                }
+                Spacer(Modifier.height(20.dp))
+                Row(Modifier.padding(start = 10.dp)){
+              //      Text("First Name: ", fontSize = 18.sp)
+                //    Spacer(Modifier.width(15.dp))
+                    TextField(
+                        value = text, // 2. The current text to display
+                        onValueChange = { newText ->
+                            text = newText // 3. Update the state with new input
+                        },
+                        label = { Text("First Name") } // 4. Optional label/hint
+                    )
+
                 }
                 Spacer(Modifier.height(15.dp))
                 Row(Modifier.padding(start = 10.dp)){
-                    Text("First Name: ", fontSize = 18.sp)
-                    Spacer(Modifier.width(15.dp))
-
-                }
-                Spacer(Modifier.height(10.dp))
-                Row(Modifier.padding(start = 10.dp)){
-                    Text("Last Name: ",fontSize = 18.sp)
-                    Spacer(Modifier.width(15.dp))
+                 //   Text("Last Name: ",fontSize = 18.sp)
+               //     Spacer(Modifier.width(15.dp))
+                    TextField(
+                        value = text, // 2. The current text to display
+                        onValueChange = { newText ->
+                            text = newText // 3. Update the state with new input
+                        },
+                        label = { Text("Last Name") } // 4. Optional label/hint
+                    )
                 }
                 Spacer(Modifier.height(10.dp))
                 Row() {
@@ -93,6 +116,9 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
         ElevatedCard(
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 6.dp
+            ),
+            colors = CardDefaults.elevatedCardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceContainerLowest
             ),
             modifier = Modifier
                 .fillMaxWidth()
