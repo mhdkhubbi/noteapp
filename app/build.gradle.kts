@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.datastore.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -74,4 +75,15 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation(libs.androidx.ui.text.google.fonts)
+    implementation("androidx.datastore:datastore-preferences:1.2.1")
+    // 3. Core Libraries
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+
+    // 4. Compose Support
+    implementation(libs.koin.compose)
+    implementation(libs.koin.compose.viewmodel)
+    implementation("io.insert-koin:koin-androidx-compose-navigation:4.0.0")
+    implementation(libs.kotlinx.serialization.json)
+
 }
