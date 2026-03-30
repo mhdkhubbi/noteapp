@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class SettingsScreenViewModel(
     private val userPreferencesManager: UserPreferencesManager
-) : ViewModel(){
+) : ViewModel() {
     private val _firstName = MutableStateFlow("")
     val firstName: StateFlow<String> = _firstName.asStateFlow()
 
@@ -19,8 +19,7 @@ class SettingsScreenViewModel(
     private val _isSwitchOn = MutableStateFlow(false)
     val isSwitchOn: StateFlow<Boolean> = _isSwitchOn.asStateFlow()
 
-  //  private val _isLoading = MutableStateFlow(true)
-  //  val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
 
     init {
         loadPreferences()
@@ -32,7 +31,6 @@ class SettingsScreenViewModel(
                 _firstName.value = preferences.firstName
                 _lastName.value = preferences.lastName
                 _isSwitchOn.value = preferences.isSwitchOn
-              //  _isLoading.value = false
             }
         }
     }
@@ -51,27 +49,19 @@ class SettingsScreenViewModel(
         }
     }
 
-    fun updateNotificationPreference(isEnabled: Boolean) {
+    fun updateThemeModePreference(isEnabled: Boolean) {
         _isSwitchOn.value = isEnabled
         viewModelScope.launch {
-            userPreferencesManager.saveNotificationPreference(isEnabled)
+            userPreferencesManager.saveThemeModePreference(isEnabled)
         }
     }
 
-    fun saveAllSettings(firstName: String, lastName: String, isNotificationsEnabled: Boolean) {
+    fun saveAllSettings(firstName: String, lastName: String) {
         viewModelScope.launch {
-            userPreferencesManager.saveAllPreferences(firstName, lastName, isNotificationsEnabled)
+            userPreferencesManager.saveAllPreferences(firstName, lastName)
         }
     }
 
-    fun clearAllSettings() {
-        viewModelScope.launch {
-            userPreferencesManager.clearPreferences()
-            _firstName.value = ""
-            _lastName.value = ""
-            _isSwitchOn.value = false
-        }
-    }
 
 
 

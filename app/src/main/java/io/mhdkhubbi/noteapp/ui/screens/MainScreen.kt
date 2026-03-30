@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -34,13 +35,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.mhdkhubbi.noteapp.R
 import io.mhdkhubbi.noteapp.ui.navigation.Destinations
+import io.mhdkhubbi.noteapp.ui.screens.settings.SettingsScreen
+import io.mhdkhubbi.noteapp.ui.screens.settings.SettingsScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(modifier: Modifier = Modifier,
+               viewModel: SettingsScreenViewModel = koinViewModel()) {
     var destination by rememberSaveable {
         mutableStateOf(Destinations.HOME)
     }
+    val firstName by viewModel.firstName.collectAsState()
+    val lastName by viewModel.lastName.collectAsState()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -70,7 +77,7 @@ fun MainScreen() {
                                 .size(40.dp, 40.dp)
                         )
                         Spacer(Modifier.width(20.dp))
-                        Text("Hi User!", fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
+                        Text("Hi $firstName $lastName!", fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
                     }
 
                 }

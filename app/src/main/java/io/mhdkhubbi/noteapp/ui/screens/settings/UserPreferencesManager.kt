@@ -46,19 +46,18 @@ class UserPreferencesManager(private val context: Context) {
         }
     }
 
-    // Save notification preference
-    suspend fun saveNotificationPreference(isEnabled: Boolean) {
+
+    suspend fun saveThemeModePreference(isEnabled: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[IS_NOTIFICATIONS_ENABLED_KEY] = isEnabled
         }
     }
 
     // Save all preferences at once
-    suspend fun saveAllPreferences(firstName: String, lastName: String, isNotificationsEnabled: Boolean) {
+    suspend fun saveAllPreferences(firstName: String, lastName: String) {
         context.dataStore.edit { preferences ->
             preferences[FIRST_NAME_KEY] = firstName
             preferences[LAST_NAME_KEY] = lastName
-            preferences[IS_NOTIFICATIONS_ENABLED_KEY] = isNotificationsEnabled
         }
     }
 

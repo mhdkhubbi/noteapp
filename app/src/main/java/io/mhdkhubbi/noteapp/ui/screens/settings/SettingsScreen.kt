@@ -1,4 +1,4 @@
-package io.mhdkhubbi.noteapp.ui.screens
+package io.mhdkhubbi.noteapp.ui.screens.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +19,8 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,12 +34,29 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.mhdkhubbi.noteapp.R
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
-fun SettingsScreen(modifier: Modifier = Modifier) {
-    var text by remember { mutableStateOf("") }
-    Column(modifier.fillMaxSize().padding(start = 20.dp, end = 20.dp, top = 20.dp)) {
+fun SettingsScreen(
+    modifier: Modifier = Modifier,
+    viewModel: SettingsScreenViewModel = koinViewModel()
+) {
+    val firstName by viewModel.firstName.collectAsState()
+    val lastName by viewModel.lastName.collectAsState()
+    val isSwitchOn by viewModel.isSwitchOn.collectAsState()
+    var firstNameInput by remember { mutableStateOf(firstName) }
+    var lastNameInput by remember { mutableStateOf(lastName) }
+    var isSwitchOnInput by remember { mutableStateOf(isSwitchOn) }
+
+    LaunchedEffect(firstName, lastName, isSwitchOn) {
+        firstNameInput = firstName
+        lastNameInput = lastName
+        isSwitchOnInput = isSwitchOn
+    }
+    Column(modifier
+        .fillMaxSize()
+        .padding(start = 20.dp, end = 20.dp, top = 20.dp)) {
         Text("Settings", fontSize = 24.sp, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.height(20.dp))
         ElevatedCard(
@@ -50,15 +69,19 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Column(Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp,)) {
+            Column(Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp)) {
                 Text(
-                    text = "Account Identity",fontSize = 20.sp, fontWeight = FontWeight.SemiBold,
+                    text = "Account Identity", fontSize = 20.sp, fontWeight = FontWeight.SemiBold,
                     modifier = Modifier
                         .padding(16.dp),
                     textAlign = TextAlign.Center,
                 )
-                Row(Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,){
+                Row(
+                    Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
                     Icon(
                         painter = painterResource(R.drawable.profile),
                         contentDescription = "Profile",
@@ -76,34 +99,34 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                     Text("Muhammad joe", fontSize = 20.sp, fontWeight = FontWeight.Medium)
                 }
                 Spacer(Modifier.height(20.dp))
-                Row(Modifier.padding(start = 10.dp)){
-              //      Text("First Name: ", fontSize = 18.sp)
-                //    Spacer(Modifier.width(15.dp))
+                Row(Modifier.padding(start = 10.dp)) {
+
                     TextField(
-                        value = text, // 2. The current text to display
+                        value = firstNameInput,
                         onValueChange = { newText ->
-                            text = newText // 3. Update the state with new input
+                            firstNameInput = newText
                         },
-                        label = { Text("First Name") } // 4. Optional label/hint
+                        label = { Text("First Name") }
                     )
 
                 }
                 Spacer(Modifier.height(15.dp))
-                Row(Modifier.padding(start = 10.dp)){
-                 //   Text("Last Name: ",fontSize = 18.sp)
-               //     Spacer(Modifier.width(15.dp))
+                Row(Modifier.padding(start = 10.dp)) {
+
                     TextField(
-                        value = text, // 2. The current text to display
+                        value = lastNameInput,
                         onValueChange = { newText ->
-                            text = newText // 3. Update the state with new input
+                            lastNameInput = newText
                         },
-                        label = { Text("Last Name") } // 4. Optional label/hint
+                        label = { Text("Last Name") }
                     )
                 }
                 Spacer(Modifier.height(10.dp))
                 Row() {
                     Spacer(Modifier.weight(1f))
-                    Button(onClick = {}) {
+                    Button(onClick = {
+                        viewModel.saveAllSettings(firstNameInput, lastNameInput)
+                    }) {
                         Text("Save")
                     }
                 }
@@ -123,7 +146,9 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Column(Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, top = 20.dp)) {
+            Column(Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, top = 20.dp)) {
                 Text(
                     text = "Appearance", fontSize = 20.sp, fontWeight = FontWeight.SemiBold,
                 )
@@ -131,7 +156,10 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text("Dark Mode", fontSize = 18.sp)
                     Spacer(Modifier.weight(1f))
-                    Switch(true, onCheckedChange = {})
+                    Switch(isSwitchOnInput, onCheckedChange = {
+                        isSwitchOnInput=it
+                        viewModel.updateThemeModePreference(isSwitchOnInput)
+                    })
                 }
                 Spacer(Modifier.height(10.dp))
 
